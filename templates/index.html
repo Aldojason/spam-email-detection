@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spam Email Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>📧 Spam Email Detection</h1>
+    <p class="subtitle">
+        Paste an email message below and check whether it is <b>Spam</b> or <b>Not Spam</b>.
+    </p>
+
+    <textarea id="message" placeholder="Enter email message here..."></textarea>
+
+    <button onclick="checkSpam()">Check Spam</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    function checkSpam() {
+        const message = document.getElementById("message").value;
+
+        if (message.trim() === "") {
+            document.getElementById("result").innerText = "⚠️ Please enter a message.";
+            return;
+        }
+
+        fetch("/predict", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ message: message })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerText = "Result: " + data.prediction;
+
+            if (data.prediction === "Spam") {
+                resultDiv.className = "spam";
+            } else {
+                resultDiv.className = "not-spam";
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
