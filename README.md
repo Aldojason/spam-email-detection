@@ -7,7 +7,7 @@ The project is built with **Python**, **Scikit-learn**, and **Flask**, and deplo
 
 ## 🌐 Live Demo
 🔗 **Live Application:**  
-👉 https://spam-email-detection.onrender.com  
+👉 https://spam-email-detection-ag9e.onrender.com 
 
 > ⚠️ Note: The application is deployed on Render free tier, so the first request may take a few seconds due to cold start.
 
